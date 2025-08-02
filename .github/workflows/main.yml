@@ -4,14 +4,14 @@ name: Hysteria Proxy Updater
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
-  workflow_dispatch:
+    - cron: '0 */2 * * *'  # اجرا هر ۲ ساعت یک‌بار
+  workflow_dispatch:        # امکان اجرای دستی
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # مجوز لازم برای کامیت کردن نتایج
 
     steps:
       - name: Checkout repo content
@@ -32,20 +32,12 @@ jobs:
           LATEST_URL="https://github.com/apernet/hysteria/releases/latest/download/hysteria-linux-amd64"
           wget -O hysteria-linux-amd64 $LATEST_URL
           chmod +x hysteria-linux-amd64
-          echo "✅ Hysteria client downloaded and made executable."
-
-      # ✅ مرحله جدید برای دیباگ و شناسایی کلاینت
-      - name: 🧐 Inspect Hysteria Client
-        run: |
-          echo "--- Hysteria Version Info ---"
-          ./hysteria-linux-amd64 --version || true
-          echo "--- Hysteria Help Output ---"
-          ./hysteria-linux-amd64 --help || true
+          echo "✅ Hysteria client downloaded."
 
       - name: 1. Fetch Hysteria Proxies
         run: python scripts/01_fetch_hysteria.py
 
-      - name: 2. Test Hysteria Proxies
+      - name: 2. Test Hysteria Proxies (Real Connection)
         run: python scripts/02_test_hysteria.py
 
       - name: 3. Generate Final Output Files
