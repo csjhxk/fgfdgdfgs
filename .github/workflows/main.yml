@@ -4,7 +4,7 @@ name: Hysteria Proxy Updater
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  # اجرا هر ۲ ساعت یک‌بار
+    - cron: '0 */8 * * *'  # اجرا هر ۲ ساعت یک‌بار
   workflow_dispatch:        # امکان اجرای دستی
 
 jobs:
