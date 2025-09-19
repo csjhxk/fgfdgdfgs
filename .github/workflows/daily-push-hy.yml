@@ -1,0 +1,43 @@
+name: Daily Push fetched_hysteria.txt to Another Repo
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天 UTC 01:00 运行（北京时间 09:00）
+  workflow_dispatch:       # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出当前仓库
+      - name: Checkout current repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. 克隆目标仓库（只拉取 main 分支）
+      - name: Clone target repo
+        run: |
+          git clone --depth=1 https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/Gbin1989/v2ray_configs.git target-repo
+          cd target-repo
+          git checkout main
+
+      # 3. 复制 fetched_hysteria.txt 并提交推送
+      - name: Copy, commit and push to target repo
+        run: |
+          cp fetched_hysteria.txt target-repo/fetched_hysteria.txt
+          cd target-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 修正远程 URL，带上 PAT
+          git remote set-url origin https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/Gbin1989/v2ray_configs.git
+
+          git add fetched_hysteria.txt
+          if git diff --staged --quiet; then
+            echo "目标仓库无变更需要提交"
+          else
+            git commit -m "自动更新 fetched_hysteria.txt $(date '+%Y-%m-%d %H:%M:%S') [skip ci]"
+            git push origin HEAD:main
+            echo "::notice::文件已推送到 Gbin1989/v2ray_configs"
+          fi
