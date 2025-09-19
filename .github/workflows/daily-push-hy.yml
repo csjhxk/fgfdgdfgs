@@ -22,8 +22,9 @@ jobs:
           cd target-repo
           git checkout main
 
-      # 3. 复制 output/fetched_hysteria.txt 并提交推送
+      # 3. 复制文件并推送（如果 commit message 包含 [skip actions] 则跳过）
       - name: Copy, commit and push to target repo
+        if: "!contains(github.event.head_commit.message, '[skip actions]')"  # 跳过条件
         run: |
           # 调试：列出 output 目录，确认文件存在
           ls -l output
@@ -42,7 +43,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "目标仓库无变更需要提交"
           else
-            git commit -m "自动更新 fetched_hysteria.txt $(date '+%Y-%m-%d %H:%M:%S') "
+            git commit -m "自动更新 fetched_hysteria.txt $(date '+%Y-%m-%d %H:%M:%S')"  # 去掉 [skip ci]
             git push origin HEAD:main
             echo "::notice::文件已推送到 Gbin1989/v2ray_configs"
           fi
