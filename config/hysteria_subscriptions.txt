@@ -3,3 +3,6 @@ https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/main/configs/Hysteria2.
 https://raw.githubusercontent.com/10ium/HiN-VPN/main/subscription/base64/hysteria2
 https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/python/hy2
 https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/python/hysteria2
+https://raw.githubusercontent.com/mshojaei77/v2rayAuto/main/subs/hysteria
+https://raw.githubusercontent.com/mshojaei77/v2rayAuto/main/subs/hy2
+https://raw.githubusercontent.com/eQnz/configs-collector-v2ray/main/sub/protocols/hysteria2.txt
