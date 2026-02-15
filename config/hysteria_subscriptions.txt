@@ -1,5 +1,6 @@
 https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/main/T,H
 https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/main/configs/Hysteria2.txt
+https://raw.githubusercontent.com/Argh94/Proxy-List/refs/heads/main/Hysteria2.txt
 https://raw.githubusercontent.com/10ium/HiN-VPN/main/subscription/base64/hysteria2
 https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/python/hy2
 https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/python/hysteria2
